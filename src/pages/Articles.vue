@@ -33,7 +33,7 @@
                     <small class="text-muted">Published: {{ formatDate(article.publishedAt) }}</small>
                     <br/>
                     <div class="d-flex justify-content-center">
-                        <RouterLink :to="`/articles/${article.id}`" class="btn btn-sm btn-primary mt-auto">
+                        <RouterLink :to="`/articles/${article.documentId}`" class="btn btn-sm btn-primary mt-auto">
                             Read More
                         </RouterLink>
                     </div>
