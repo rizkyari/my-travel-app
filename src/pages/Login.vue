@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-center align-items min-vh-100s">
+    <div class="d-flex justify-content-center align-items-center min-vh-100s">
         <div class="w-100" style="max-width: 400px;">
             <BCard class="shadow p-4 rounded-4">
                 <div class="text-center mb-4">
@@ -48,7 +48,6 @@
                         Don't have an account?
                         <RouterLink to="/register">Register here</RouterLink>
                     </small>
-                    <BButton @click="check">check</BButton>
                 </div>
             </BCard>
         </div>
