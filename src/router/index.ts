@@ -19,6 +19,12 @@ const routes = [
         component: () => import('../pages/Register.vue'),
         meta: { requiresAuth: false }
     },
+    {
+        path: '/articles',
+        name: 'Articles',
+        component: () => import('../pages/Articles.vue'),
+        meta: { requiresAuth: false }
+    },
 ]
 
 const router = createRouter({
