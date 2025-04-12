@@ -5,6 +5,7 @@ import type { Article } from "../types/Article";
 
 export const useArticleStore = defineStore('articles', () => {
     const articles = ref<Article[]>([])
+    const selectedArticle = ref<Article | null>(null)
     const token = ref(localStorage.getItem('token') || '')
     const loading = ref(false)
     const error = ref('')
@@ -65,6 +66,26 @@ export const useArticleStore = defineStore('articles', () => {
         }
     }
 
+    const fetchArticleById = async (documentId: string) => {
+        loading.value = true
+        error.value = ''
+        selectedArticle.value = null
+
+        try {
+            const res = await api.get(`/articles/${documentId}?populate=*`,{
+                headers: {
+                    Authorization: `Bearer ${token.value}`
+                }
+            })
+
+            selectedArticle.value = res.data.data
+        } catch(err) {
+            error.value = 'Failed to fetch article'
+        } finally {
+            loading.value = false
+        }
+    }
+
     return {
         articles,
         loading,
@@ -72,6 +93,8 @@ export const useArticleStore = defineStore('articles', () => {
         hasMore,
         searchQuery,
         categoryFilter,
+        selectedArticle,
         fetchArticles,
+        fetchArticleById,
     }
 })
