@@ -4,7 +4,7 @@
             <BSpinner label="Loading..."/>
         </div>
 
-        <div v-else>
+        <div v-else class="text-center">
             <h2 class="fw-bold mb-3">{{ articleStore.selectedArticle?.title }}</h2>
             <img
             v-if="articleStore.selectedArticle?.cover_image_url"
@@ -21,26 +21,36 @@
                 <small class="text-muted">{{ articleStore.selectedArticle?.user.email }}</small>
             </div>
 
-            <div v-if="articleStore.selectedArticle?.comments?.length" class="mt-5">
-                <h5 class="fw-bold mb-3">Comments</h5>
-                <ul class="list-group">
-                    <li class="list-group-item" v-for="comment in articleStore.selectedArticle?.comments" :key="comment.id">
-                        {{ comment.content }}
-                    </li>
-                </ul>
+            <div class="mt-5">
+                <BButton @click="toggleComments" variant="outline-secondary" class="mb-3">
+                    {{ showComments ? 'Hide Comments' : 'Show Comments' }}
+                </BButton>
+            </div>
+
+            <div v-if="showComments">
+                <CommentForm :articleId="articleStore.selectedArticle?.id" />
+                <CommentList :articleId="articleStore.selectedArticle?.id" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { ref,onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useArticleStore } from '../store/articleStore';
 import { formatDate } from '../utils/format';
 
+import CommentList from '../components/CommentList.vue';
+import CommentForm from '../components/CommentForm.vue';
+
 const route = useRoute()
 const articleStore = useArticleStore()
+const showComments = ref(false)
+
+const toggleComments = () => {
+  showComments.value = !showComments.value
+}
 
 onMounted(() => {
     articleStore.fetchArticleById(route.params.documentId as string)
