@@ -3,9 +3,10 @@ import {ref} from 'vue'
 import api from '../api/axios'
 import router from '../router/index'
 import type { AxiosError } from 'axios'
+import type { User } from '../types/User'
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref(null)
+    const user = ref<User | null>(null)
     const token = ref(localStorage.getItem('token') || '')
     const loading = ref(false)
     const error = ref('')
@@ -70,6 +71,20 @@ export const useAuthStore = defineStore('auth', () => {
         router.push('/login')
     }
 
+    const fetchMe = async() => {
+        try {
+            const res = await api.get('/users/me', {
+                headers: {
+                    Authorization: `Bearer ${token.value}`,
+                },
+            })
+            user.value = res.data
+        } catch(err) {
+            console.error('Failed to fetch profile:', err)
+            logout()
+        }
+    }
+
     return {
         user,
         token,
@@ -78,5 +93,6 @@ export const useAuthStore = defineStore('auth', () => {
         register,
         login,
         logout,
+        fetchMe,
     }
 })
