@@ -23,23 +23,39 @@ const routes = [
         path: '/articles',
         name: 'Articles',
         component: () => import('../pages/Articles.vue'),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/profile',
+        name: 'Profile',
+        component: () => import('../pages/Profile.vue'),
+        meta: { requiresAuth: true }
     },
 ]
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    scrollBehavior() {
+        return { top: 0 }
+    }
 })
 
 router.beforeEach((to,_from,next) => {
     const loggedIn = !!localStorage.getItem('token')
 
+    if((to.name === 'Login' || to.name === 'Register') && loggedIn){
+        next('/articles')
+        return
+    }
+
     if(to.meta.requiresAuth && !loggedIn){
         next('/login')
-    }else{
-        next()
+        return
     }
+        
+    next()
+    
 })
 
 export default router;

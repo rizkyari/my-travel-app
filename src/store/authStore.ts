@@ -46,6 +46,9 @@ export const useAuthStore = defineStore('auth', () => {
                 password: password
             })
 
+            token.value = res.data.jwt
+            user.value = res.data.user
+            
             localStorage.setItem('token', res.data.jwt)
             localStorage.setItem('user', JSON.stringify(res.data.user))
 
