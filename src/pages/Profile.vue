@@ -45,6 +45,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useAuthStore } from '../store/authStore'
+import { formatDate } from '../utils/format';
 
 const auth = useAuthStore()
 
@@ -53,14 +54,4 @@ onMounted(() => {
         auth.fetchMe()
     }
 })
-
-const formatDate = (isoDate?: string) => {
-    if (!isoDate) return '-'
-    const date = new Date(isoDate)
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    })
-}
 </script>
