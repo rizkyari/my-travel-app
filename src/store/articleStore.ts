@@ -134,7 +134,7 @@ export const useArticleStore = defineStore('articles', () => {
         error.value = ''
 
         try {
-            const res = await api.put(`/articles/${documentId}`,{
+            await api.put(`/articles/${documentId}`,{
                 data: {
                     title: form.title,
                     description: form.description,
@@ -154,7 +154,23 @@ export const useArticleStore = defineStore('articles', () => {
             loading.value = false
         }
     }
+    
+    const deleteArticle = async(documentId: string) => {
+        loading.value = true
 
+        try {
+            await api.delete(`/articles/${documentId}`,{
+                headers: {
+                    Authorization:`Bearer ${token.value}`
+                }
+            })
+            articles.value = articles.value.filter(a => a.documentId !== documentId)
+        } catch(err) {
+            console.error(err) 
+        } finally {
+            loading.value = false
+        }
+    }
     return {
         articles,
         loading,
@@ -170,5 +186,6 @@ export const useArticleStore = defineStore('articles', () => {
         uploadImage,
         createArticle,
         updateArticle,
+        deleteArticle,
     }
 })
