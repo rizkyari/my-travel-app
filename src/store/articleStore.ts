@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import api from '../api/axios';
-import type { Article } from "../types/Article";
+import type { Article,ArticleForm } from "../types/Article";
 
 export const useArticleStore = defineStore('articles', () => {
     const articles = ref<Article[]>([])
@@ -13,6 +13,8 @@ export const useArticleStore = defineStore('articles', () => {
     const currentPage = ref(1)
     const searchQuery = ref('')
     const categoryFilter = ref('')
+    const uploadLoading = ref(false)
+    const errorUpload = ref(false)
 
     const fetchArticles = async(reset = false) => {
         if (loading.value) return
@@ -86,6 +88,46 @@ export const useArticleStore = defineStore('articles', () => {
         }
     }
 
+    const uploadImage = async(file: File): Promise<string> => {
+        uploadLoading.value = true
+        errorUpload.value = false
+        try {
+            const formData = new FormData()
+            formData.append('files', file)
+
+            const res = await api.post('/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token.value}`
+                }
+            })
+
+            return res.data[0].url
+        } catch(err){
+            console.error('Failed to upload image: ', err)
+            errorUpload.value = true
+            throw err
+        } finally {
+            uploadLoading.value = false
+        }
+    }
+
+    const createArticle = async (form: ArticleForm) => {
+        loading.value = true
+
+        try {
+            await api.post('/articles', {data: form}, {
+                headers: {
+                    'Authorization': `Bearer ${token.value}`
+                }
+            })
+        } catch(err) {
+            throw err
+        } finally {
+            loading.value = false
+        }
+    }
+
     return {
         articles,
         loading,
@@ -94,7 +136,11 @@ export const useArticleStore = defineStore('articles', () => {
         searchQuery,
         categoryFilter,
         selectedArticle,
+        uploadLoading,
+        errorUpload,
         fetchArticles,
         fetchArticleById,
+        uploadImage,
+        createArticle,
     }
 })

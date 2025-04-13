@@ -6,6 +6,12 @@
             <BAlert variant="danger" show>{{ articleStore.error }}</BAlert>
         </div>
 
+        <div class="d-flex justify-content-end align-items-center mb-3">
+            <RouterLink to="/articles/create">
+                <BButton variant="success">+ Create Artikel</BButton>
+            </RouterLink>
+        </div>
+
         <BForm @submit.prevent="onSearch" class="mb-4 row g-2 align-items-end">
             <div class="col-md-6">
                 <BFormGroup label="Search Title">
