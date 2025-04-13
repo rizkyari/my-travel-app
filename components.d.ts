@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ArticleForm: typeof import('./src/components/ArticleForm.vue')['default']
     BAlert: typeof import('bootstrap-vue-next/components/BAlert')['BAlert']
     BaseFooter: typeof import('./src/components/BaseFooter.vue')['default']
     BaseNavbar: typeof import('./src/components/BaseNavbar.vue')['default']

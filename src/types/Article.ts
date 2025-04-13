@@ -37,3 +37,10 @@ export interface Article {
     comments: Comment[]
     localizations?: any[]
 }
+
+export interface ArticleForm {
+    title: string
+    description: string
+    cover_image_url: string
+    category: number | null
+}

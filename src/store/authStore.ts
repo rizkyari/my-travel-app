@@ -11,6 +11,17 @@ export const useAuthStore = defineStore('auth', () => {
     const loading = ref(false)
     const error = ref('')
 
+    const restoreUser = () => {
+        const storedUser = localStorage.getItem('user')
+        if (storedUser) {
+          try {
+            user.value = JSON.parse(storedUser)
+          } catch (e) {
+            console.error('Invalid user data in localStorage')
+          }
+        }
+    }
+
     const register = async (username: string, email: string, password: string) => {
         loading.value = true
         error.value = ''
@@ -56,7 +67,6 @@ export const useAuthStore = defineStore('auth', () => {
             router.push('/articles')
         } catch (err: any) {
             console.error('Login error:', err)
-            console.log('Error msg:', err?.response?.data?.error?.message)
             error.value = err.response?.data?.error?.message || 'Login Failed'
         } finally {
             loading.value = false
@@ -84,6 +94,8 @@ export const useAuthStore = defineStore('auth', () => {
             logout()
         }
     }
+
+    restoreUser()
 
     return {
         user,
