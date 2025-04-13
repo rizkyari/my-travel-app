@@ -19,6 +19,7 @@
           
           <!-- Authenticated User -->
           <BNavItem v-if="isLoggedIn" to="/articles" exact>Articles</BNavItem>
+          <BNavItem v-if="isLoggedIn" to="/categories" exact>Category</BNavItem>
           <BDropdown
           v-if="isLoggedIn"
           right
