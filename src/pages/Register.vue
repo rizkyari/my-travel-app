@@ -8,7 +8,7 @@
                 </div>
 
                 <BForm @submit.prevent="handleRegister">
-                    <BFormGroup label="Username" label-for="username">
+                    <BFormGroup label="Username" label-for="username" class="mt-3">
                         <BFormInput
                         id="username"
                         v-model="form.username"
@@ -18,7 +18,7 @@
                         />
                     </BFormGroup>
 
-                    <BFormGroup label="Email" label-for="email">
+                    <BFormGroup label="Email" label-for="email" class="mt-3">
                         <BFormInput
                         id="email"
                         v-model="form.email"
@@ -28,7 +28,7 @@
                         />
                     </BFormGroup>
 
-                    <BFormGroup label="Password" label-for="password">
+                    <BFormGroup label="Password" label-for="password" class="mt-3">
                         <BFormInput
                         id="password"
                         v-model="form.password"
