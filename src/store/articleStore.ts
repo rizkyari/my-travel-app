@@ -81,6 +81,7 @@ export const useArticleStore = defineStore('articles', () => {
             })
 
             selectedArticle.value = res.data.data
+            return res.data.data
         } catch(err) {
             error.value = 'Failed to fetch article'
         } finally {
@@ -128,6 +129,32 @@ export const useArticleStore = defineStore('articles', () => {
         }
     }
 
+    const updateArticle = async(documentId: string, form: ArticleForm) => {
+        loading.value = true
+        error.value = ''
+
+        try {
+            const res = await api.put(`/articles/${documentId}`,{
+                data: {
+                    title: form.title,
+                    description: form.description,
+                    cover_image_url: form.cover_image_url,
+                    category: form.category,
+                },
+            }, {
+                headers:{
+                    Authorization: `Bearer ${token.value}`
+                }
+            })
+
+        } catch(err) {
+            console.error('Update article error: ', err)
+            error.value = 'Failed to update article.'
+        } finally {
+            loading.value = false
+        }
+    }
+
     return {
         articles,
         loading,
@@ -142,5 +169,6 @@ export const useArticleStore = defineStore('articles', () => {
         fetchArticleById,
         uploadImage,
         createArticle,
+        updateArticle,
     }
 })
