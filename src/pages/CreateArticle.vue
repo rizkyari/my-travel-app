@@ -80,7 +80,7 @@ const handleFileChange = async (e: Event) => {
 
 const categoryOptions = computed(() => {
     return categoryStore.categories.map(cat => ({
-        value: cat.id,
+        value: cat.documentId,
         text: cat.name
     }))
 })

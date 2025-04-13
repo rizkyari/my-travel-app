@@ -105,7 +105,7 @@ const onSubmit = async () => {
   
 const categoryOptions = computed(() =>
     categoryStore.categories.map((cat) => ({
-      value: cat.id,
+      value: cat.documentId,
       text: cat.name
     }))
 )
