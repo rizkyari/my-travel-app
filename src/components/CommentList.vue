@@ -30,7 +30,6 @@ const openConfirmModal = (documentId: string, articleId?: number) => {
     if (!articleId) return
     selectedComment.value = { documentId, articleId }
     showModal.value = true
-    console.log('fungsi jalan');
     
 }
 

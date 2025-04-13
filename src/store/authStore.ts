@@ -56,7 +56,6 @@ export const useAuthStore = defineStore('auth', () => {
             router.push('/articles')
         } catch (err: any) {
             console.error('Login error:', err)
-            console.log('Error msg:', err?.response?.data?.error?.message)
             error.value = err.response?.data?.error?.message || 'Login Failed'
         } finally {
             loading.value = false

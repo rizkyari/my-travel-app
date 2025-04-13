@@ -10,7 +10,6 @@ import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 import { createBootstrap } from 'bootstrap-vue-next'
 
 const app = createApp(App)
-console.log('createBootstrap', createBootstrap)
 app.use(router)
 app.use(createPinia())
 app.use(createBootstrap())
