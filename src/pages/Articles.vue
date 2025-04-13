@@ -38,7 +38,7 @@
                     </BCardText>
                     <small class="text-muted">Published: {{ formatDate(article.publishedAt) }}</small>
                     <br/>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center mt-3">
                         <RouterLink :to="`/articles/${article.documentId}`" class="btn btn-sm btn-primary mt-auto">
                             Read More
                         </RouterLink>
