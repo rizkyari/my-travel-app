@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex justify-content-center align-items-center min-vh-100s">
         <div class="w-100" style="max-width: 400px;">
-            <BCard class="shadow p-4 rounded-4">
+            <BCard class="shadow p-4 rounded-4 mt-5">
                 <div class="text-center mb-4">
                     <h3 class="fw-bold mb-1">Welcome Back</h3>
                     <p class="text-muted mb-0">
@@ -10,7 +10,7 @@
                 </div>
 
                 <BForm @submit.prevent="handleLogin">
-                    <BFormGroup label="Email" label-for="email">
+                    <BFormGroup label="Email" label-for="email" class="mt-2">
                         <BFormInput
                         id="email"
                         v-model="form.email"
@@ -19,7 +19,7 @@
                         required
                         />
                     </BFormGroup>
-                    <BFormGroup label="Password" label-for="password">
+                    <BFormGroup label="Password" label-for="password" class="mt-2">
                         <BFormInput
                         id="password"
                         v-model="form.password"

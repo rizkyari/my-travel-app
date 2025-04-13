@@ -33,12 +33,10 @@ declare module 'vue' {
     BNavItem: typeof import('bootstrap-vue-next/components/BNav')['BNavItem']
     BSpinner: typeof import('bootstrap-vue-next/components/BSpinner')['BSpinner']
     BTable: typeof import('bootstrap-vue-next/components/BTable')['BTable']
-    Category: typeof import('./src/components/Category.vue')['default']
     CategoryFormModal: typeof import('./src/components/CategoryFormModal.vue')['default']
     CommentForm: typeof import('./src/components/CommentForm.vue')['default']
     CommentList: typeof import('./src/components/CommentList.vue')['default']
     ConfirmModal: typeof import('./src/components/ConfirmModal.vue')['default']
-    CreateCategory: typeof import('./src/components/CreateCategory.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
